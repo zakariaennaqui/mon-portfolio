@@ -1,69 +1,639 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mon Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-      color: #333;
-      padding: 2rem;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    p {
-      max-width: 600px;
-      margin: auto;
-      font-size: 1.2rem;
-    }
-    section {
-      margin-top: 3rem;
-    }
-    .project {
-      margin-bottom: 2rem;
-    }
-    footer {
-      margin-top: 4rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Ton Nom</h1>
-    <p>Bienvenue sur mon portfolio !</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ennaqui Zakaria - Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .dark body {
+        background-color: #121212;
+        color: #f1f1f1;
+      }
 
-  <section>
-    <h2>À propos de moi</h2>
-    <p>Ici tu pourras ajouter une petite bio ou présentation.</p>
-  </section>
+      .dark section,
+      .dark .project,
+      .dark .project div,
+      .dark .project img,
+      .dark .intro,
+      .dark input,
+      .dark textarea,
+      .dark form,
+      .dark footer {
+        background-color: #1e1e1e;
+        color: #f1f1f1;
+      }
 
-  <section>
-    <h2>Projets</h2>
-    <div class="project">
-      <h3>Projet 1</h3>
-      <p>Description rapide du projet.</p>
+      .dark input,
+      .dark textarea {
+        border: 1px solid #444;
+      }
+
+      .dark nav {
+        background-color: #1e1e1ecc;
+        border-bottom: 1px solid #333;
+      }
+
+      .dark .social a {
+        color: #4dabf7;
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      section {
+        padding-top: 3rem;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f8f9fa;
+        color: #212529;
+        line-height: 1.6;
+        padding: 2rem;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding-top: 7rem;
+      }
+      header img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: contain;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .intro {
+        font-size: 1.2rem;
+        color: #495057;
+      }
+      section {
+        max-width: 800px;
+        margin: 0 auto 3rem auto;
+      }
+      h2 {
+        border-bottom: 2px solid #dee2e6;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        font-size: 1.6rem;
+        color: #343a40;
+      }
+      .project {
+        margin-bottom: 2rem;
+      }
+      .project h3 {
+        margin-bottom: 0.3rem;
+      }
+      footer {
+        text-align: center;
+        margin-top: 4rem;
+        font-size: 0.9rem;
+        color: #868e96;
+      }
+      .social a {
+        color: #1c7ed6;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 1rem;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+      }
+      .dark {
+        background: #121212;
+        color: #f1f1f1;
+      }
+      .dark a {
+        color: #4dabf7;
+      }
+      .dark .project div {
+        background-color: #1e1e1e !important;
+      }
+    </style>
+    <script>
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <style>
+      .dark {
+        background: #121212;
+        color: #f1f1f1;
+      }
+      .dark a {
+        color: #4dabf7;
+      }
+      .dark .project div {
+        background-color: #1e1e1e !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="position: fixed; top: 1rem; right: 1rem; z-index: 1000">
+      <button
+        onclick="toggleTheme()"
+        style="
+          background: none;
+          border: 2px solid #1c7ed6;
+          color: #1c7ed6;
+          padding: 0.3rem 0.6rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: bold;
+        "
+      >
+        Switch
+      </button>
     </div>
-    <div class="project">
-      <h3>Projet 2</h3>
-      <p>Une autre réalisation que tu veux montrer.</p>
-    </div>
-  </section>
+    <nav
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffffcc;
+        backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+        z-index: 999;
+        border-bottom: 1px solid #dee2e6;
+      "
+    >
+      <a
+        href="#about"
+        style="text-decoration: none; color: #1c7ed6; font-weight: bold"
+        >À propos</a
+      >
+      <a
+        href="#skills"
+        style="text-decoration: none; color: #1c7ed6; font-weight: bold"
+        >Compétences</a
+      >
+      <!-- <a
+        href="#services"
+        style="text-decoration: none; color: #1c7ed6; font-weight: bold"
+        >Ce que je propose</a
+      > -->
+      <a
+        href="#projects"
+        style="text-decoration: none; color: #1c7ed6; font-weight: bold"
+        >Projets</a
+      >
+      <a
+        href="#contact"
+        style="text-decoration: none; color: #1c7ed6; font-weight: bold"
+        >Contact</a
+      >
+    </nav>
 
-  <footer>
-    © Ton Nom - 2025
-  </footer>
-</body>
+    <header>
+      <img src="ziko - Copie.jpg" alt="Zakaria Ennaqui" />
+      <h1>Ennaqui Zakaria</h1>
+      <p class="intro">Étudiant en Génie Informatique à l'ENSA de Berrechid</p>
+    </header>
+
+    <section id="about" class="fade-in">
+      <h2>À propos</h2>
+      <p>
+        Étudiant en première année du cycle ingénieur en Génie Informatique à
+        l’École Nationale des Sciences Appliquées de Berrechid (ENSAB), je suis
+        passionné par le développement logiciel, l’architecture des systèmes et
+        les réseaux informatiques. <br />
+        Grâce à une formation polyvalente alliant programmation (Java, C, Web,
+        Python), bases de données, génie logiciel et systèmes d’exploitation, je
+        développe une solide culture d’ingénieur. <br />
+        Je suis actuellement à la recherche d’un stage d’initiation pour
+        découvrir le milieu professionnel, consolider mes compétences techniques
+        et contribuer à des projets concrets. <br />
+        N’hésitez pas à me contacter !
+      </p>
+      <div style="margin-top: 1rem">
+        <a
+          href="CV.pdf"
+          target="_blank"
+          style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #1c7ed6;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+          "
+          >Télécharger mon CV</a
+        >
+      </div>
+    </section>
+
+    <section id="skills" class="fade-in">
+      <h2>Compétences</h2>
+
+      <div style="margin-bottom: 1rem">
+        <strong>HTML / CSS / JavaScript</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 60%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            60%
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <strong>POO(Java)</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 50%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            50%
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <strong>TypeScript, React, Node.js</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 50%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            50%
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <strong>Bases de données(SQL, ...)</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 50%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            50%
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <strong>Conception(UML, ...)</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 80%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            80%
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <strong>Systèmes(Linux, Windows)</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 70%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            70%
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <strong>Outils(Git / GitHub)</strong>
+        <div style="background: #dee2e6; border-radius: 5px; overflow: hidden">
+          <div
+            style="
+              width: 85%;
+              background: #1c7ed6;
+              color: white;
+              padding: 0.4rem;
+            "
+          >
+            85%
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="services" class="fade-in">
+      <h2>Ce que je propose</h2>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.5rem;
+          margin-top: 2rem;
+        "
+      >
+        <div
+          style="
+            background: #1c7ed6;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+          "
+        >
+          <h3>Développement Web</h3>
+          <p>
+            Création de sites web modernes, responsive et performants avec HTML,
+            CSS, JS et React.
+          </p>
+        </div>
+
+        <div
+          style="
+            background: #1c7ed6;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+          "
+        >
+          <h3>Refonte de sites</h3>
+          <p>
+            Amélioration de sites existants pour un design plus moderne, une
+            meilleure vitesse et accessibilité.
+          </p>
+        </div>
+
+        <div
+          style="
+            background: #1c7ed6;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+          "
+        >
+          <h3>Intégration & Debug</h3>
+          <p>
+            Intégration de maquettes, corrections de bugs, responsive, et
+            optimisation SEO basique.
+          </p>
+        </div>
+      </div>
+    </section> -->
+
+    <section id="projects" class="fade-in">
+      <h2>Projets</h2>
+
+      <div class="project" style="margin-bottom: 2rem">
+        <img
+          src="projects.jpg"
+          alt="Projects"
+          style="
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+          "
+        />
+        <h3>projects</h3>
+        <p>...</p>
+        <a
+          href="https://github.com/zakariaennaqui"
+          target="_blank"
+          style="
+            display: inline-block;
+            margin-top: 0.5rem;
+            background-color: #1c7ed6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+          "
+          >Voir projects</a
+        >
+      </div>
+
+      <div class="project" style="margin-bottom: 2rem">
+        <img
+          src="project1.jpg"
+          alt="Portfolio V1"
+          style="
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+          "
+        />
+        <h3>Portfolio V1</h3>
+        <p>...</p>
+        <a
+          href="https://zakariaennaqui.github.io/mon-portfolio/"
+          target="_blank"
+          style="
+            display: inline-block;
+            margin-top: 0.5rem;
+            background-color: #1c7ed6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+          "
+          >Voir le projet</a
+        >
+      </div>
+
+      <div class="project">
+        <h3>Développement d'un site e-commerce - (Projet génie logiciel)</h3>
+        <p>
+          - Conception UML (PlantUML), cahier des charges, planification Gantt
+          <br />
+          - Technologies : HTML, CSS, JavaScript
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Java en POO</h3>
+        <p>
+          - Développement d'applications avec interfaces, gestion de données
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Programmation Web</h3>
+        <p>Frontend : HTML/CSS/JS, React ; Backend : PHP, MySQL</p>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <h2>Contact</h2>
+      <form
+        action="https://formsubmit.co/zakariaennaqui.pro@gmail.com"
+        method="POST"
+      >
+        <input type="hidden" name="_captcha" value="false" />
+        <div style="margin-bottom: 1rem">
+          <label>Nom :</label><br />
+          <input
+            type="text"
+            name="name"
+            required
+            style="width: 100%; padding: 0.5rem"
+          />
+        </div>
+        <div style="margin-bottom: 1rem">
+          <label>Email :</label><br />
+          <input
+            type="email"
+            name="email"
+            required
+            style="width: 100%; padding: 0.5rem"
+          />
+        </div>
+        <div style="margin-bottom: 1rem">
+          <label>Message :</label><br />
+          <textarea
+            name="message"
+            rows="5"
+            required
+            style="width: 100%; padding: 0.5rem"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          style="
+            background-color: #1c7ed6;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+          "
+        >
+          Envoyer
+        </button>
+      </form>
+    </section>
+
+    <footer>
+      <div class="social">
+        <a href="https://github.com/zakariaennaqui" target="_blank">GitHub</a> |
+        <a href="mailto:zakariaennaqui.pro@gmail.com">Email</a> |
+        <a href="https://linkedin.com/in/zakaria-ennaqui-990883362">LinkedIn</a>
+      </div>
+      <p>© Ennaqui Zakaria - 2025</p>
+    </footer>
+    <script>
+      function toggleTheme() {
+        document.documentElement.classList.toggle("dark");
+        const isDark = document.documentElement.classList.contains("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      }
+    </script>
+
+    <script>
+      const faders = document.querySelectorAll(".fade-in");
+
+      const appear = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      faders.forEach((fade) => {
+        appear.observe(fade);
+      });
+    </script>
+
+    <footer
+      style="
+        background-color: #f1f3f5;
+        padding: 2rem 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #495057;
+        margin-top: 4rem;
+      "
+    >
+      <p>© 2025 Zakaria Ennaqui. Tous droits réservés.</p>
+      <p>
+        <a
+          href="https://github.com/zakariaennaqui"
+          target="_blank"
+          style="color: #1c7ed6; text-decoration: none"
+          >GitHub</a
+        >
+        |
+        <a
+          href="https://linkedin.com/in/zakaria-ennaqui-990883362"
+          target="_blank"
+          style="color: #1c7ed6; text-decoration: none"
+          >LinkedIn</a
+        >
+        |
+        <a
+          href="mailto:zakariaennaqui.pro@gmail.com"
+          style="color: #1c7ed6; text-decoration: none"
+          >Me contacter</a
+        >
+      </p>
+    </footer>
+  </body>
 </html>
